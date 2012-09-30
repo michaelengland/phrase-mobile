@@ -2,6 +2,7 @@ require File.expand_path('../lib/phrase_mobile/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.add_dependency 'libxml-ruby', '~> 2.3.3'
+  gem.add_dependency 'typhoeus', '~> 0.4.2'
   gem.add_development_dependency 'rspec'
   gem.add_development_dependency 'spork'
   gem.authors = ['Michael England']

@@ -1,0 +1,8 @@
+---
+en-GB:
+  app_name: MyTestApp
+  hello_world: Hello world!
+  menu_settings: Settings
+  title_activity_main: MainActivity
+  variables_included: ! 'This is the number: %d'
+  reordered_variables_included: ! 'This: %1$s and this: %2$s could be reordered'
