@@ -1,0 +1,1 @@
+require 'phrase_mobile/exporters/android_strings_exporter'
