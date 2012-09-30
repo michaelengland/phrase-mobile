@@ -1,0 +1,1 @@
+require 'phrase_mobile/importers/android_strings_importer'
