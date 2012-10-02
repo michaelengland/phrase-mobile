@@ -8,6 +8,8 @@ PATH
 GEM
   remote: http://rubygems.org/
   specs:
+    addressable (2.3.2)
+    crack (0.3.1)
     diff-lcs (1.1.3)
     ffi (1.1.5)
     libxml-ruby (2.3.3)
@@ -24,6 +26,9 @@ GEM
     typhoeus (0.4.2)
       ffi (~> 1.0)
       mime-types (~> 1.18)
+    webmock (1.8.11)
+      addressable (>= 2.2.7)
+      crack (>= 0.1.7)
 
 PLATFORMS
   ruby
@@ -32,3 +37,4 @@ DEPENDENCIES
   phrase_mobile!
   rspec
   spork
+  webmock

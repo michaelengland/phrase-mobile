@@ -5,6 +5,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'typhoeus', '~> 0.4.2'
   gem.add_development_dependency 'rspec'
   gem.add_development_dependency 'spork'
+  gem.add_development_dependency 'webmock'
   gem.authors = ['Michael England']
   gem.description = %q{Ruby Gem for importing/exporting Android & iPhone strings from/to Phrase.}
   gem.email = %w(mg.england@gmail.com)

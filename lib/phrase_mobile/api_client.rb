@@ -11,31 +11,41 @@ module PhraseMobile
       self.configuration = options.fetch(:configuration)
     end
 
-    def translations_for_locale(locale)
-      response = Typhoeus::Request.get(translations_url_for_locale(locale))
+    def read_translations_for_locale(locale)
+      response = Typhoeus::Request.get(build_url_for_path('/translations/download'), build_params(locale: locale))
       if response.success?
         YAML::load(response.body)[locale]
       elsif response.code == 404
         raise TranslationsNotFoundException.new(locale)
-      elsif response.code == 401
+      else
+        handle_response_error(response)
+      end
+    end
+
+    def create_translations_for_locale(translations, locale)
+      response = Typhoeus::Request.post(build_url_for_path('/translation_keys/upload'),
+                                       body: build_params(file_content: { locale => translations }.to_yaml))
+      unless response.success?
+        handle_response_error(response)
+      end
+    end
+
+    private
+
+    def handle_response_error(response)
+      if response.code == 401
         raise InvalidAuthTokenException
       else
         raise ClientConnectionException
       end
     end
 
-    private
-
-    def translations_url_for_locale(locale)
-      build_url_for_path_and_params('/translations/download', locale: locale)
+    def build_params(params)
+      { auth_token: self.configuration.auth_token }.merge(params)
     end
 
-    def build_url_for_path_and_params(path, additional_params)
-      "#{SITE_URL}#{path}?#{params_string({ auth_token: self.configuration.auth_token }.merge(additional_params))}"
-    end
-
-    def params_string(params = {})
-      params.map { |k, v| "#{k}=#{v}" }.join('&')
+    def build_url_for_path(path)
+      "#{SITE_URL}#{path}"
     end
   end
 end
